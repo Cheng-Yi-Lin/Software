@@ -70,11 +70,13 @@ class StopLineFilterNode(object):
                 continue
             if segment.points[0].x < 0 or segment.points[1].x < 0: # the point is behind us 
                 continue
-
+            if segment.points[0].x > 0.2 and segment.points[1].x > 0.2:
+                continue
+            #print segment.points[0].y
             p1_lane = self.to_lane_frame(segment.points[0])
             p2_lane = self.to_lane_frame(segment.points[1])
-            avg_x = 0.5*(p1_lane[0] + p2_lane[0])
-            avg_y = 0.5*(p1_lane[1] + p2_lane[1])
+            avg_x = 0.5*(p1_lane[0] + p2_lane[0])*0.75
+            avg_y = 0.5*(p1_lane[1] + p2_lane[1])*0.75
             stop_line_x_accumulator += avg_x
             stop_line_y_accumulator += avg_y # TODO output covariance and not just mean
             good_seg_count += 1.0

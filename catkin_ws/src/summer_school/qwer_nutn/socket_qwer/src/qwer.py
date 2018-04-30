@@ -15,10 +15,10 @@ class Qwer_Player(object):
         rospy.loginfo("[%s] Initializing " %(self.node_name))
 
         self.pub_e_stop = rospy.Publisher("wheels_driver_node/emergency_stop",BoolStamped,queue_size=1)
-        self.pub_joy_override = rospy.Publisher("/qwer/joy_mapper_node/joystick_override", BoolStamped, queue_size=1)
+        self.pub_joy_override = rospy.Publisher("joy_mapper_node/joystick_override", BoolStamped, queue_size=1)
         self.pub_voice = rospy.Publisher("~Voice", String, queue_size=1)
         self.sub_voice = rospy.Subscriber("~Voice", String, self.cb_SoundPlayer, queue_size=1)
-        self.sub_tag_id = rospy.Subscriber("/qwer/tag_detections_test", Int32, self.get_Apriltag, queue_size=1)
+        self.sub_tag_id = rospy.Subscriber("tag_detections_test", Int32, self.get_Apriltag, queue_size=1)
         self.pub_switch = rospy.Publisher("joy_mapper_node/switchSpeed", BoolStamped, queue_size=1)
 
         #set global variable
@@ -122,9 +122,10 @@ class Qwer_Player(object):
         while True:
             rospy.loginfo("listen for client...")
             (conn, ADDR) = sock.accept()
-            rospy.loginfo("get client")
+            rospy.loginfo("get client-----------------------------------------")
             rospy.loginfo(ADDR)
             szBuf = conn.recv(1024)
+           # print(szBuf)
             rospy.loginfo("i recv ----------- szBuf= %s" % (szBuf))
             if szBuf == "1\n":
                 rospy.loginfo("forward")

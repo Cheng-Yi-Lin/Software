@@ -38,7 +38,7 @@ class Socket_Qwer(object):
             rospy.loginfo("get client")
             rospy.loginfo(ADDR)
             szBuf = conn.recv(1024)
-            #rospy.loginfo("recv:" + szBuf)
+            rospy.loginfo("recv:" + szBuf)
 
             if szBuf == "1\n":
                 rospy.loginfo("forward")
